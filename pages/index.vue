@@ -8,6 +8,10 @@
     {{  state  }}
 
     <Button @click="handleClick">Button</Button>
+
+    <hr />
+
+    <img src="/animal.jpg">
   </div>
 </template>
 
