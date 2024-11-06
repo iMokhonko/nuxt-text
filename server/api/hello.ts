@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   // const { Items = [] } = await client.send(command);
 
   return {
-    secret: secret('secret'),
+    // secret: secret('secret'),
     // items: Items?.[0],
     message: 'dev hello world'
   }
