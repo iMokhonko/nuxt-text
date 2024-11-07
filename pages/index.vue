@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ data }}
+    {{ error }}
     <hr />
     {{ data2 }}
     <hr />
@@ -16,26 +16,30 @@
 </template>
 
 <script setup lang="ts">
-const { data } = await useFetch('/api/hello');
+const { data, error } = await useFetch('https://api.auth.dev.imokhonko.com/profile');
 
 useHead({
-  title: data.value.message
+  title: data.value ?? ''
 });
 
-useSeoMeta({
-  title: data.mesage,
-  ogTitle: data.mesage,
-  description: data.mesage,
-  ogDescription: 'This is my amazing site, let me tell you all about it.',
-  ogImage: 'https://example.com/image.png',
-  twitterCard: 'summary_large_image',
-})
+// useSeoMeta({
+//   title: data.mesage,
+//   ogTitle: data.mesage,
+//   description: data.mesage,
+//   ogDescription: 'This is my amazing site, let me tell you all about it.',
+//   ogImage: 'https://example.com/image.png',
+//   twitterCard: 'summary_large_image',
+// })
 
 const state = ref({ one: 1, two: 2 });
 
-const data2 = ref('loading...');
+const data2 = ref('loading...') as any;
 onMounted(async () => {
-  data2.value = await $fetch('/api/hello')
+  try {
+    data2.value = await $fetch('https://api.auth.dev.imokhonko.com/profile')
+  } catch(e) {
+    data2.value = e;
+  }
 });
 
 const handleClick = () => {
